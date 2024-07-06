@@ -33,11 +33,11 @@ return {
               cmp.complete()
             end
           end),
-          ['<tab>'] = cmp.mapping(function()
+          ['<tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item({behavior = 'insert'})
             else
-              cmp.complete()
+              fallback()
             end
           end),
         },

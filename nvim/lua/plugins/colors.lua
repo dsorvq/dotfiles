@@ -1,5 +1,6 @@
 return {
   {
+    -- "kdheepak/monochrome.nvim",
     "dsorvq/oscuron.vim",
     lazy = false,
     priority = 1000,
