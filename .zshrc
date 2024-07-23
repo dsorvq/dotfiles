@@ -2,7 +2,7 @@ export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="minimal"
 # Components on the left prompt
-MNML_PROMPT=('mnml_cwd 2 0' mnml_ssh mnml_pyenv mnml_status mnml_keymap)
+MNML_PROMPT=('mnml_cwd 3 0' mnml_ssh mnml_pyenv mnml_status mnml_keymap)
 # Components on the right prompt
 MNML_RPROMPT=(mnml_git)
 # Components shown on info line
@@ -17,7 +17,14 @@ COMPLETION_WAITING_DOTS="true"
 
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-plugins=(git)
+plugins=(
+  git
+  fzf
+  zsh-autosuggestions
+)
+
+# TODO: Better mapping? 
+bindkey '^I ' autosuggest-accept
 
 source $ZSH/oh-my-zsh.sh
 
@@ -27,3 +34,9 @@ else
   export EDITOR='nvim'
 fi
 
+fzf-history-widget-accept() {
+  fzf-history-widget
+  zle accept-line
+}
+zle     -N     fzf-history-widget-accept
+bindkey '^X^R' fzf-history-widget-accept
