@@ -1,11 +1,12 @@
 return {
   {
-    -- "kdheepak/monochrome.nvim",
-    "dsorvq/oscuron.vim",
+    "zenbones-theme/zenbones.nvim",
+    dependencies = { "rktjmp/lush.nvim" },
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd([[colorscheme oscuron]])
+      vim.cmd([[set background=dark]])
+      vim.cmd([[colorscheme zenbones]])
     end,
   }
 }

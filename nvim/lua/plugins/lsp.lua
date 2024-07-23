@@ -14,7 +14,13 @@ return {
         -- to learn the available actions
         lsp_zero.default_keymaps({buffer = bufnr})
       end)
-      require('lspconfig').clangd.setup({})
+      require('lspconfig').clangd.setup({
+        cmd = { "clangd", "--background-index", "--clang-tidy" },  -- Command to start the language server with additional options
+        filetypes = { "c", "cpp", "objc", "objcpp" },  -- File types to associate with clangd
+        flags = {
+          debounce_text_changes = 150,
+        }
+      })
       local cmp = require('cmp')
 
       cmp.setup({
