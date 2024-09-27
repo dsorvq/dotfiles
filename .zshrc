@@ -1,4 +1,6 @@
 export ZSH="$HOME/.oh-my-zsh"
+path+=('/home/dsorvq/.cargo/bin')
+export PATH
 
 ZSH_THEME="minimal"
 # Components on the left prompt
@@ -40,3 +42,4 @@ fzf-history-widget-accept() {
 }
 zle     -N     fzf-history-widget-accept
 bindkey '^X^R' fzf-history-widget-accept
+
