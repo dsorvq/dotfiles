@@ -1,67 +1,48 @@
 return {
-  { 
-    "VonHeikemen/lsp-zero.nvim",
-    dependencies = {
-      {'neovim/nvim-lspconfig'},
-      {'hrsh7th/cmp-nvim-lsp'},
-      {'hrsh7th/nvim-cmp'},
-      {'L3MON4D3/LuaSnip'},
-    },
+  {
+    "neovim/nvim-lspconfig",
+    dependencies = { 'saghen/blink.cmp' },
     config = function()
-      local lsp_zero = require("lsp-zero")
-      lsp_zero.on_attach(function(client, bufnr)
-        -- see :help lsp-zero-keybindings
-        -- to learn the available actions
-        lsp_zero.default_keymaps({buffer = bufnr})
-      end)
-      require('lspconfig').clangd.setup({
-        cmd = { "clangd", "--background-index", "--clang-tidy" },  -- Command to start the language server with additional options
-        filetypes = { "c", "cpp", "objc", "objcpp" },  -- File types to associate with clangd
-        flags = {
-          debounce_text_changes = 150,
-        }
-      })
-      local cmp = require('cmp')
+      local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-      cmp.setup({
-        sources = {
-          {name = 'nvim_lsp'},
-        },
-        mapping = {
-          ['<C-y>'] = cmp.mapping.confirm({select = false}),
-          ['<C-e>'] = cmp.mapping.abort(),
-          ['<Up>'] = cmp.mapping.select_prev_item({behavior = 'select'}),
-          ['<Down>'] = cmp.mapping.select_next_item({behavior = 'select'}),
-          ['<C-p>'] = cmp.mapping(function()
-            if cmp.visible() then
-              cmp.select_prev_item({behavior = 'insert'})
-            else
-              cmp.complete()
-            end
-          end),
-          ['<tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item({behavior = 'insert'})
-            else
-              fallback()
-            end
-          end),
-        },
-        snippet = {
-          expand = function(args)
-            require('luasnip').lsp_expand(args.body)
+      local function setup_lua_ls()
+        require("lspconfig").lua_ls.setup {
+          capabilities = capabilities,
+          on_init = function(client)
+            local lua_settings = client.config.settings.Lua or {}
+            client.config.settings.Lua = vim.tbl_deep_extend("force", lua_settings, {
+              runtime = { version = "LuaJIT" },
+              workspace = {
+                checkThirdParty = false,
+                library = { vim.env.VIMRUNTIME },
+              },
+            })
           end,
-        },
-      })
-    end
+          settings = {
+            Lua = {},
+          },
+        }
+      end
+
+      local function setup_clangd()
+        require("lspconfig").clangd.setup {
+          capabilities = capabilities,
+          cmd = { "clangd" },
+          filetypes = { "c", "cpp", "objc", "objcpp" },
+          init_options = {
+            -- fallbackFlags = { "-std=c++17" },
+          },
+        }
+      end
+
+      setup_lua_ls()
+      setup_clangd()
+    end,
   },
+
+  -- TODO: move to separate module?
   {
     "tpope/vim-sleuth"
-  },
-  {
-    'windwp/nvim-autopairs',
-    event = "InsertEnter",
-    config = true
   },
 }
 
