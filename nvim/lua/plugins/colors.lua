@@ -1,10 +1,11 @@
 return {
   {
-    "projekt0n/github-nvim-theme",
+    "nyoom-engineering/oxocarbon.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme("github_dark_high_contrast")
+      vim.opt.background = "dark"
+      vim.cmd.colorscheme("oxocarbon")
     end,
   }
 }
