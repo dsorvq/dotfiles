@@ -8,7 +8,7 @@ return {
     local telescope = require('telescope')
     local builtin = require('telescope.builtin')
 
-    telescope.load_extension('fzf')
+    -- telescope.load_extension('fzf')
 
     vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
     vim.keymap.set('n', '<leader>ff', builtin.find_files, {})

@@ -5,38 +5,48 @@ return {
     config = function()
       local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-      local function setup_lua_ls()
-        require("lspconfig").lua_ls.setup {
-          capabilities = capabilities,
-          on_init = function(client)
-            local lua_settings = client.config.settings.Lua or {}
-            client.config.settings.Lua = vim.tbl_deep_extend("force", lua_settings, {
-              runtime = { version = "LuaJIT" },
-              workspace = {
-                checkThirdParty = false,
-                library = { vim.env.VIMRUNTIME },
-              },
-            })
-          end,
-          settings = {
-            Lua = {},
-          },
-        }
-      end
-
       local function setup_clangd()
         require("lspconfig").clangd.setup {
           capabilities = capabilities,
           cmd = { "clangd" },
-          filetypes = { "c", "cpp", "objc", "objcpp" },
           init_options = {
-            -- fallbackFlags = { "-std=c++17" },
+            fallbackFlags = { "-std=c++20" },
           },
         }
       end
 
-      setup_lua_ls()
+      local function setup_bash()
+        require("lspconfig").bashls.setup {}
+      end
+
+      local function setup_go()
+        require("lspconfig").gopls.setup {}
+      end
+
+      local function setup_python()
+        require('lspconfig').ruff.setup {}
+      end
+
       setup_clangd()
+      setup_bash()
+      setup_go()
+      setup_python()
+
+      vim.diagnostic.config({
+        virtual_text = true,
+        signs = true,
+        underline = true,
+        update_in_insert = false,
+        severity_sort = false,
+        float = {
+          focusable = false,
+          style = "minimal",
+          border = "rounded",
+          source = "always",
+          header = "",
+          prefix = "",
+        },
+      })
     end,
   },
 
