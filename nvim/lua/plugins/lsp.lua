@@ -24,7 +24,23 @@ return {
       end
 
       local function setup_python()
-        require('lspconfig').ruff.setup {}
+        require('lspconfig').pyright.setup({
+          capabilities = capabilities,
+          settings = {
+            pyright = {
+              disableOrganizeImports = false,
+              analysis = {
+                useLibraryCodeForTypes = true,
+                diagnosticMode = "workspace",
+                typeCheckingMode = "basic"
+              }
+            }
+          }
+        })
+
+        require('lspconfig').ruff.setup {
+          capabilities = capabilities,
+        }
       end
 
       setup_clangd()
