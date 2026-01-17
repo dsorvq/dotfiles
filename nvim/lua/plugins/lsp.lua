@@ -6,41 +6,21 @@ return {
       local capabilities = require('blink.cmp').get_lsp_capabilities()
 
       local function setup_clangd()
-        require("lspconfig").clangd.setup {
-          capabilities = capabilities,
-          cmd = { "clangd" },
-          init_options = {
-            fallbackFlags = { "-std=c++20" },
-          },
-        }
+        vim.lsp.enable('clangd')
       end
 
       local function setup_bash()
-        require("lspconfig").bashls.setup {}
+        vim.lsp.enable('bashls')
       end
 
       local function setup_go()
-        require("lspconfig").gopls.setup {}
+        vim.lsp.enable('gopls')
       end
 
       local function setup_python()
-        require('lspconfig').pyright.setup({
-          capabilities = capabilities,
-          settings = {
-            pyright = {
-              disableOrganizeImports = false,
-              analysis = {
-                useLibraryCodeForTypes = true,
-                diagnosticMode = "workspace",
-                typeCheckingMode = "basic"
-              }
-            }
-          }
-        })
-
-        require('lspconfig').ruff.setup {
-          capabilities = capabilities,
-        }
+        -- ignore python
+        -- vim.lsp.enable('pyright')
+        -- vim.lsp.enable('ruff')
       end
 
       setup_clangd()

@@ -1,11 +1,11 @@
 return {
   {
-    -- "nyoom-engineering/oxocarbon.nvim",
+    -- "rose-pine/neovim",
     -- lazy = false,
     -- priority = 1000,
     -- config = function()
-      -- vim.opt.background = "dark"
-      -- vim.cmd.colorscheme("oxocarbon")
+      -- vim.opt.background = "light"
+      -- vim.cmd.colorscheme("rose-pine")
     -- end,
   }
 }
