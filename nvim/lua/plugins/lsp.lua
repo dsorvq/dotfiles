@@ -46,7 +46,7 @@ return {
     end,
   },
 
-  -- TODO: move to separate module?
+  -- TODO: i don't think this work well
   {
     "tpope/vim-sleuth"
   },
