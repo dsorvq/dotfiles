@@ -9,6 +9,10 @@ return {
         vim.lsp.enable('clangd')
       end
 
+      local function setup_rust()
+        vim.lsp.enable('rust_analyzer')
+      end
+
       local function setup_bash()
         vim.lsp.enable('bashls')
       end
@@ -24,6 +28,7 @@ return {
       end
 
       setup_clangd()
+      setup_rust()
       setup_bash()
       setup_go()
       setup_python()
