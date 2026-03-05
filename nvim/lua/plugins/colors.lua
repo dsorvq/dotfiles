@@ -1,4 +1,5 @@
 return {
+  --[[
   {
     -- "ellisonleao/gruvbox.nvim",
     -- "shaunsingh/nord.nvim",
@@ -28,4 +29,5 @@ return {
       vim.cmd.colorscheme("thorn")
     end,
   }
+  --]]
 }
