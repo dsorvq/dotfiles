@@ -5,7 +5,7 @@ return {
     priority = 1000,
     config = function()
       -- vim.opt.background = "dark"
-      vim.cmd.colorscheme("github_dark_default")
+      vim.cmd.colorscheme("github_light_default")
     end,
   }
 }

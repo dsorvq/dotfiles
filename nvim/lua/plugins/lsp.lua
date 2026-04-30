@@ -6,6 +6,10 @@ return {
       local capabilities = require('blink.cmp').get_lsp_capabilities()
 
       local function setup_clangd()
+        vim.lsp.config['clangd'] = {
+          cmd = { "clangd", "--background-index", "-j", "8"},
+        }
+
         vim.lsp.enable('clangd')
       end
 
