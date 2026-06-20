@@ -22,6 +22,9 @@ return {
       end
 
       local function setup_go()
+        vim.lsp.config('gopls', {
+          cmd = { 'ya', 'tool', 'gopls' },
+        })
         vim.lsp.enable('gopls')
       end
 

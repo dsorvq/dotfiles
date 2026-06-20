@@ -23,8 +23,6 @@ vim.g.loaded_netrwPlugin = 1
 
 -- vim.opt.background = "light"
 
-vim.opt.clipboard = 'unnamedplus'
-
 -- Explicitly use OSC 52 provider (useful for SSH/Tmux)
 vim.g.clipboard = {
   name = 'OSC 52',
