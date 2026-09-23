@@ -9,6 +9,11 @@ return {
     local builtin = require('telescope.builtin')
 
     -- telescope.load_extension('fzf')
+    telescope.setup({
+      defaults = {
+        path_display = { 'filename_first' },
+      },
+    })
 
     vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
     vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
